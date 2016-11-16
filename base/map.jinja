@@ -1,0 +1,24 @@
+{% import_yaml 'base/defaults.yaml' as defaults %}
+{% import_yaml 'base/osmap.yaml' as osmap %}
+
+{# get the settings for the os_family grain #}
+{% set osfam = salt['grains.filter_by'](osmap) or {} %}
+
+{# merge the os family/codename specific data over the defaults #}
+{% do defaults.base.update(osfam) %}
+
+{# merge the pillar:lookup dict into the defaults/os specific dict #}
+{% set lookup = salt['pillar.get']('base:lookup',
+                                   default=defaults.base,
+                                   merge=True) %}
+
+{# merge the actual base pillar into the above combined dict #}
+{% set base = salt['pillar.get']('base', default=lookup, merge=True) %}
+
+{% set includes = [] %}
+{% if grains['os_family'] == 'FreeBSD' %}
+  {% do includes.append('periodic') %}
+  {% if base.configure_sendmail %}
+    {% do includes.append('sendmail') %}
+  {% endif %}
+{% endif %}

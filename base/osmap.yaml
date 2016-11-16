@@ -1,0 +1,59 @@
+FreeBSD:
+  packages:
+    - sudo
+    - ca_root_nss
+    - zsh
+    - tmux
+    - screen
+    - vim-lite
+    - joe
+    - rsync
+    - git
+
+  periodic_conf:
+    - option: daily_output
+      value: /var/log/daily.log
+    - option: weekly_output
+      value: /var/log/weekly.log
+    - option: monthly_output
+      value: /var/log/monthly.log
+    # include the security log with the daily log, rather
+    # than mailing separately
+    - option: daily_status_security_inline
+      value: "YES"
+    # and *try* not to log much (this doesn't completely
+    # eliminate the logging, though)
+    - option: daily_show_success
+      value: "NO"
+    - option: daily_show_info
+      value: "NO"
+    - option: daily_show_badconfig
+      value: "YES"
+    - option: weekly_show_success
+      value: "NO"
+    - option: weekly_show_info
+      value: "NO"
+    - option: weekly_show_badconfig
+      value: "YES"
+    - option: monthly_show_success
+      value: "NO"
+    - option: monthly_show_info
+      value: "NO"
+    - option: monthly_show_badconfig
+      value: "YES"
+
+  sendmail_conf:
+    - option: "sendmail_submit_enable"
+      value: "NO"
+    - option: "sendmail_outbound_enable"
+      value: "YES"
+    - option: "sendmail_msp_queue_enable"
+      value: "YES"
+
+Debian:
+  packages:
+    - zsh
+    - rsync
+    - screen
+    - vim-tiny  # we probably do not want to bring all the stuff
+    - git

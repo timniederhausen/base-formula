@@ -1,0 +1,2 @@
+base:
+  configure_sendmail: true
