@@ -1,2 +1,3 @@
 base:
   configure_sendmail: true
+  root_email_alias: ''

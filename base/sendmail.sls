@@ -12,3 +12,19 @@ sendmail_cfg_{{ entry.option }}:
 sendmail:
   service.running:
     - enable: True
+
+{% if base.root_email_alias %}
+root_mail_alias:
+  file.replace:
+    - name: /etc/mail/aliases
+    - pattern: '^#?root: (.*?)$'
+    - repl: 'root: {{ base.root_email_alias }}'
+    - append_if_not_found: true
+
+sendmail_reload:
+  service.running:
+    - name: sendmail
+    - reload: True
+    - onchanges:
+      - file: root_mail_alias
+{% endif %}
