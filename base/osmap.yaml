@@ -5,7 +5,6 @@ FreeBSD:
     - zsh
     - tmux
     - screen
-    - vim-lite
     - joe
     - rsync
     - git
