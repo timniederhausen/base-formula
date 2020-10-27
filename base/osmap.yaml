@@ -4,7 +4,6 @@ FreeBSD:
     - ca_root_nss
     - zsh
     - tmux
-    - screen
     - joe
     - rsync
     - git
@@ -45,9 +44,9 @@ FreeBSD:
     - option: "sendmail_submit_enable"
       value: "NO"
     - option: "sendmail_outbound_enable"
-      value: "YES"
+      value: "NO"
     - option: "sendmail_msp_queue_enable"
-      value: "YES"
+      value: "NO"
 
 Debian:
   packages:
