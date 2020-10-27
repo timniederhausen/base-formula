@@ -10,7 +10,7 @@ pkg_{{ pkg }}:
 include:
 {% for include in includes %}
   - base.{{ include }}
-{% endfor %} 
+{% endfor %}
 {% endif %}
 
 {% if grains.os_family == 'FreeBSD' %}
@@ -18,6 +18,12 @@ python_cert_symlink:
   file.symlink:
     - name: /etc/ssl/cert.pem
     - target: /usr/local/etc/ssl/cert.pem
+
+# Run secure syslog
+syslog_secure:
+  sysrc.managed:
+    - name: syslogd_flags
+    - value: -c -ss
 {% endif %}
 
 # seems to be required by certain applications.
